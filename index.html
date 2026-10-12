@@ -27,23 +27,13 @@ nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(560px,
 .flavio-avatar{overflow:hidden}.flavio-avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .deck-art img{width:100%;height:100%;object-fit:cover;display:block}
 
-.rj-brand{display:inline-flex;align-items:flex-end;gap:12px;margin:0 0 4px}
-.rj-cards{display:flex;align-items:flex-end;height:48px}
-.rj-cards span{display:grid;place-items:center;width:34px;height:43px;margin-right:-7px;border:3px solid #111;border-radius:5px;background:#f6efe3;font-size:20px;box-shadow:2px 2px 0 #111}
-.rj-cards span:nth-child(1){transform:rotate(-12deg)}
-.rj-cards span:nth-child(2){transform:translateY(-5px);background:#c00000;color:#fff;z-index:2}
-.rj-cards span:nth-child(3){transform:rotate(12deg);background:#f5c400}
-.rj-wordmark{font-weight:1000;line-height:.88;letter-spacing:-1.5px;font-size:34px;text-shadow:2px 2px 0 #111}
-.rj-wordmark b{color:#fff}
-.rj-wordmark strong{color:#ffd21a}
+.rj-brand{display:flex;align-items:center;margin:0 0 6px}
+.rj-brand img{display:block;width:min(360px,92%);height:auto;max-height:105px;object-fit:contain;object-position:left center}
 header>p{margin-top:7px}
 @media(max-width:520px){.rj-wordmark{font-size:28px}.rj-cards{height:42px}.rj-cards span{width:29px;height:37px;font-size:17px}}
 </style><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head><body><div class="app">
 <header>
-  <div class="rj-brand" aria-label="RevoluJogos">
-    <div class="rj-cards" aria-hidden="true"><span>🌎</span><span>✊</span><span>⚑</span></div>
-    <div class="rj-wordmark"><b>REVOLU</b><strong>JOGOS</strong></div>
-  </div>
+  <div class="rj-brand"><img src="assets/revolujogoslogo.png" alt="RevoluJogos"></div>
   <p>BARALHO • ISSO É BOM OU RUIM?</p>
   <button type="button" class="ghost smallbtn" style="margin-top:10px" onclick="startDeck()">⌂ INÍCIO</button>
 </header>
