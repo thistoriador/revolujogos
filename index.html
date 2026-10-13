@@ -284,8 +284,27 @@ function deckPosterArt(x){
 }
 let deckOrder=[],deckPos=0,deckChoice='',deckCover=true;
 function startDeck(){if(!deckOrder.length){deckOrder=[...deckData];deckCover=true}renderDeck(false)}
-function shuffleDeck(){deckOrder=[...deckData].sort(()=>Math.random()-.5);deckPos=0;deckChoice='';deckCover=false;renderDeck(false)}
-function beginDeck(){deckOrder=[...deckData].sort(()=>Math.random()-.5);deckCover=false;deckPos=0;deckChoice='';renderDeck(false)}
+// Estatísticas anônimas: uma partida por início/reembaralhamento, sem dados pessoais.
+function revoluVisitorId(){
+ const key='revolujogos_visitor_v1';
+ try {
+  let id=localStorage.getItem(key);
+  if(id && /^[0-9a-f-]{36}$/i.test(id))return id;
+  id=crypto.randomUUID();localStorage.setItem(key,id);return id;
+ } catch(_){return crypto.randomUUID()}
+}
+function registrarPartidaRevolu(){
+ try {
+  const id=crypto.randomUUID();
+  const visitante_id=revoluVisitorId();
+  // Não interromper a partida caso a rede esteja indisponível.
+  void sb.from('revolujogos_partidas').insert({id,visitante_id,jogo:'bom-ou-ruim'}).then(({error})=>{
+   if(error)console.warn('Estatísticas do baralho indisponíveis:',error.message);
+  });
+ }catch(e){console.warn('Estatísticas do baralho indisponíveis:',e)}
+}
+function shuffleDeck(){deckOrder=[...deckData].sort(()=>Math.random()-.5);deckPos=0;deckChoice='';deckCover=false;registrarPartidaRevolu();renderDeck(false)}
+function beginDeck(){deckOrder=[...deckData].sort(()=>Math.random()-.5);deckCover=false;deckPos=0;deckChoice='';registrarPartidaRevolu();renderDeck(false)}
 function renderDeck(reveal){
  const el=document.getElementById('deckCard');
  if(deckCover){document.getElementById('deckProgress').textContent='32 cartas';el.innerHTML='<div class="deck-card deck-cover"><img class="deck-start-poster" src="assets/cartazbomouruim.png" alt="Bem-vindo ao jogo Isso é Bom ou Ruim?"><button onclick="beginDeck()">EMBARALHAR E COMEÇAR</button></div>';return}
